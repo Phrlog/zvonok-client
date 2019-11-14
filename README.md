@@ -1,4 +1,7 @@
 # zvonok-client
+[![Build Status](https://scrutinizer-ci.com/g/Phrlog/zvonok-client/badges/build.png?b=master)](https://scrutinizer-ci.com/g/Phrlog/zvonok-client/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Phrlog/zvonok-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Phrlog/zvonok-client/?branch=master)
+[![License](https://poser.pugx.org/phrlog/zvonok-client/license)](https://packagist.org/packages/phrlog/zvonok-client)
 
 ## Description
 Library for interacting with [Zvonok(CallTools)](https://zvonok.com/) API
