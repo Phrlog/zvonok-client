@@ -20,28 +20,28 @@ $client = new \Phrlog\Zvonok\Client(\Phrlog\Zvonok\Config::createCalltools('your
 [Docs](https://api-docs.zvonok.com/?version=latest#ca6f7010-34b2-49e5-93e7-876d08b0b0d6)
 ```php
 $request = new \Phrlog\Zvonok\Phone\Request\AddCallRequest('+79857777777', 'campaign_id');
-$response = $client->addCall($request);
+$response = $client->execute($request);
 ```
 
 ### Get call by id
 [Docs](https://api-docs.zvonok.com/?version=latest#50b1f5ff-200b-4177-b2e5-19aa806e5f63)
 ```php
 $request = new \Phrlog\Zvonok\Phone\Request\GetCallByIdRequest('234');
-$response = $client->getCallById($request);
+$response = $client->execute($request);
 ```
 
 ### Get call by phone
 [Docs](https://api-docs.zvonok.com/?version=latest#8031f9ee-daa5-4d41-9197-118e93efb62b)
 ```php
 $request = new \Phrlog\Zvonok\Phone\Request\GetCallByPhoneRequest('+79857777777', 'campaign_id');
-$response = $client->getCallByPhone($request);
+$response = $client->execute($request);
 ```
 
 ### Get region by phone
 [Docs](https://api-docs.zvonok.com/?version=latest#8031f9ee-daa5-4d41-9197-118e93efb62b)
 ```php
 $request = new \Phrlog\Zvonok\Phone\Request\GetRegionByPhoneRequest('+79857777777');
-$response = $client->getRegionByPhone($request);
+$response = $client->execute($request);
 ```
 
 ## License

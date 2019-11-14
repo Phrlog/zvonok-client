@@ -6,7 +6,7 @@ use JsonMapper, JsonMapper_Exception;
 use Http\Client\{Exception, HttpClient};
 use Http\Discovery\{HttpClientDiscovery, Psr17FactoryDiscovery};
 use Psr\Http\Message\RequestFactoryInterface;
-use Phrlog\Zvonok\Exception\{EmptyResponseException, ResponseWithErrorException};
+use Phrlog\Zvonok\Exception\{EmptyResponseException, ResponseWithErrorException, UnknownRequestException};
 use Phrlog\Zvonok\Phone\Mapper\{AddCallMapper, GetCallByIdMapper, GetRegionByPhoneMapper, GetCallByPhoneMapper};
 use Phrlog\Zvonok\Phone\Request\{
     RequestInterface,
@@ -22,7 +22,7 @@ use Phrlog\Zvonok\Phone\Response\{AddCallResponse, CallResultResponse, RegionRes
  */
 class Client
 {
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.1.0';
 
     /**
      * @var Config
@@ -62,6 +62,30 @@ class Client
         $this->jsonMapper = $jsonMapper ?? new JsonMapper();
         $this->httpClient = $httpClient ?? HttpClientDiscovery::find();
         $this->requestFactory = $requestFactory ?? Psr17FactoryDiscovery::findRequestFactory();
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return AddCallResponse|CallResultResponse|RegionResponse
+     * @throws Exception
+     * @throws JsonMapper_Exception
+     */
+    public function execute(RequestInterface $request)
+    {
+        $class = get_class($request);
+
+        switch($class) {
+            case AddCallRequest::class:
+                return $this->addCall($request);
+            case GetCallByIdRequest::class:
+                return $this->getCallById($request);
+            case GetCallByPhoneRequest::class:
+                return $this->getCallByPhone($request);
+            case GetRegionByPhoneRequest::class:
+                return $this->getRegionByPhone($request);
+            default:
+                throw new UnknownRequestException($class);
+        }
     }
 
     /**
